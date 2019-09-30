@@ -1,0 +1,94 @@
+id: Strategy
+id = λp . p
+
+seq: Strategy → Strategy -> Strategy
+seq = λf . λs . λp . s (f p)   
+
+leftChoice: Strategy → Strategy → Strategy
+leftChoice = λf . λs . λp . try (f p) catch (s p)
+
+try: Strategy → Strategy
+try = λs . leftChoice s id
+
+repeat: Strategy → Strategy
+repeat = λs . try (s ; (repeat s))
+
+normalize: Strategy → Strategy
+normalize: λs . repeat(apply s findFirst(isDefined s))
+
+----------------------------------------------------
+
+for(int i = 0; i < M; i++) {
+  for(int j = 0; j < N; j++) {
+    for(int k = 0; k < N; j++) {
+      for(int l = 0; l < O; l++) {
+        // some computation
+}}}}
+
+workGroups = λp .
+normalize(mapFusion) ;
+apply(mapWrg findFirst(isDefined(mapWrg p))) ;  // 1
+apply(mapWrg findFirst(isDefined(mapWrg p))) ;  // 0
+apply(mapLcl findFirst(isDefined(mapWrg p))) ;  // 1
+apply(mapLcl findFirst(isDefined(mapWrg p))) ;  // 0
+normalize(mapSeq) p
+
+----------------------------------------------------
+
+for(int i = 0; i < M; i++) {
+  for(int j = 0; j < N; j++) {
+    // some computation
+}}
+
+map(map(f))
+
+// mapFusion = map(f) ∘ map(g) → map(f∘g)
+// mapGlb = map(f) ∘ mapGlb(f)
+// mapSeq = map(f) ∘ mapSeq(f)
+
+simpleParallelism = λp .
+normalize(mapFusion) ;
+apply(mapGlb findFirst(isDefined(mapGlb p))) ; 
+normalize(mapSeq) p
+
+workgroupParallelism +> simpleParallism // this is what macro rules did
+
+----------------------------------------------------
+
+for(int i = 0; i < M; i++) {
+  for(int j = 0; j < N; j++) {
+    // some computation
+}}
+
+**f
+
+tiling = λp .
+tileEveryDimension ;
+rewriteNormalForm ; 
+rearrangeDimensions p
+
+----
+
+for(int i = 0; i < M; i++) {
+  for(int ii = 0; ii < iTile; ii++) {
+    for(int j = 0; j < N; j++) {
+      for(int jj = 0; jj < jTile; jj++) {
+        // some computation
+}}}}
+
+J ∘ **(J ∘ **f ∘ S) ∘ S
+J ∘ **J ∘ ****f ∘ **S ∘ S
+
+for(int i = 0; i < M; i++) {
+  for(int j = 0; j < N; j++) {
+    for(int ii = 0; ii < iTile; ii++) {
+      for(int jj = 0; jj < jTile; jj++) {
+        // some computation
+}}}}
+
+J ∘ **J ∘ 
+*T ∘ ****f ∘ *T ∘ 
+**S ∘ S
+
+---
+try(overlappedtiling)
