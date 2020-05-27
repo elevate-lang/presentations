@@ -1,6 +1,8 @@
 # Presentations about ELEVATE
 
 ## 2020
+- Talk by Bastian Hagedorn: [ELEVATE - A Language for Describing Optimization Strategies](https://github.com/elevate-lang/presentations/raw/master/Nvidia2020/NVIDIA-2020.pdf), at Microsoft Research, Cambridge UK, April 2020.
+
 - Talk by Bastian Hagedorn: [ELEVATE - A Language for Describing Optimization Strategies](https://github.com/elevate-lang/presentations/raw/master/Nvidia2020/NVIDIA-2020.pdf), at the NVIDIA Compiler Research Group, January 2020.
 
 ## 2019
